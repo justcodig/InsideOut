@@ -7,6 +7,7 @@ import * as fs from 'fs';
 import { CreateContent } from 'src/inside-out-info/dto/information-dto';
 import { Insideoutinfo } from './models/inside-out-info.model';
 import { UpdateContent } from './dto/information.dio';
+import * as path from 'path';
 
 
 @Controller('information')
@@ -51,7 +52,9 @@ export class InformationController {
     if (!file) {
       return res.status(400).json({ message: '파일이 필요합니다.' });
     }
+    console.log(file.filename)
     const result = await this.informationService.update(id, updateContent, file.filename);
+    res.status(200).send(result);
     if (!result) {
         throw new NotFoundException(`ID가 ${id}인 정보를 찾을 수 없습니다.`);
     }
@@ -62,7 +65,7 @@ export class InformationController {
   @Post('write') // 글 작성
   @UseInterceptors(FileInterceptor('file'))
   async infoCreate(@Res() res: Response, @Req() req: Request, @Body() createContent : UpdateContent, @UploadedFile() file: Express.Multer.File) {
-    console.log("write action")
+    console.log("file:",file)
       if (!file) {
           return res.status(400).json({ message: '파일이 필요합니다.' });
       }
@@ -77,11 +80,13 @@ export class InformationController {
 
   @Delete('delete/:id')
   async delete(@Param('id') id : number, @Res() res:Response){
+    
     try {
       await this.informationService.delete(id);
-      res.send('삭제완료')
+      res.status(200).send({ message: '삭제 완료' });
     } catch (error) {
-      throw new Error("유저가 다릅니다.");
+      throw new NotFoundException(`ID가 인 정보를 찾을 수 없습니다.`);
+      // throw new Error("유저가 다릅니다.");
     }
   }
 }

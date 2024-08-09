@@ -1,13 +1,3 @@
-//////// why so serious?? 글씨 한글자씩나오게하는 모션 /////////
-// const introText = document.querySelectorAll("span");
-
-// window.onload = () => {
-//   let timer = 100;
-//   introText.forEach((item) => {
-//     item.style.animation = `fade 500ms ${(timer += 50)}ms forwards`;
-//   });
-// };
-////////////// 여기까지 한글자씩나오게하는 글씨 모션 ///////////////////
 
 
 ///////////////////////// 중간 슬라이스 모션 주기 /////////////////////////
@@ -166,4 +156,46 @@ const tipBtn = document.getElementById("tipBtn")
 tipBtn.addEventListener("click", () => {
   location.href = "http://127.0.0.1:5501/frontend/html/main.html"
 })
+
+
+const butTip =document.querySelector("#butTip");
+const butInfo =document.querySelector("#butInfo");
+const butqa =document.querySelector("#butqa");
+const butLogin =document.querySelector("#butLogin");
+const meetTip =document.querySelector("#meetTip");
+
+
+/*헤더 맛팁에서 사이트로 이동  */
+butTip.addEventListener("click",(e)=>{
+  e.preventDefault();
+  window.location.href = ""
+})
+
+/*정보사이트로 이동 */
+butInfo.addEventListener("click",(e)=>{
+  e.preventDefault();
+  window.location.href = "infoDetail.html"
+})
+
+/*Q&A이동 */
+butqa.addEventListener("click",(e)=>{
+  e.preventDefault();
+  window.location.href = ""
+})
+
+/*로그인으로 이동 */
+butLogin.addEventListener("click",(e)=>{
+  e.preventDefault();
+  window.location.href = ""
+})
+/*중간 맛팁사이트로 이동 */
+meetTip.addEventListener("click",(e)=>{
+  e.preventDefault();
+  window.location.href = ""
+})
+
+
+
+
+
 

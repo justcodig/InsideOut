@@ -27,7 +27,7 @@ export class InformationService {
 
     async create( createContent : UpdateContent, img : string) : Promise<Insideoutinfo> {
         const { whiskey_text, whiskey_name }= createContent
-        console.log("#############################################",whiskey_text);
+        console.log("#############################################",whiskey_text, whiskey_name, img);
         
         return await this.infoLogic.create({
             nick_name: "nick_name" , w_name:whiskey_name, w_info:whiskey_text, img
@@ -35,13 +35,13 @@ export class InformationService {
     }
 
     async update(id: number, updateContent:UpdateContent, img : string): Promise<Insideoutinfo> {
-        const record = await this.findOneById(id);
+        const record = await this.findOneById(id)
         if(!record){
             throw new Error(`ID가 ${id}인 레코드를 찾을 수 없습니다.`);
         }
-        const { whiskey_text, whiskey_name }= updateContent
+        const { whiskey_name, whiskey_text, whiskey_image }= updateContent
         const updatedRecord = await record.update({
-            whiskey_name, whiskey_text, whiskey_image : img
+            w_name : whiskey_name, w_info: whiskey_text, img
         });
         return updatedRecord;
     }
